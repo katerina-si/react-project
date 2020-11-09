@@ -2,8 +2,8 @@ import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import UserList from '../components/UserList';
-import * as actions from '../state/actions';
-import * as selectors from '../state/selectors';
+import * as actions from '../modules/users/actions';
+import * as selectors from '../modules/users/selectors';
 
 const UserListContainer = () => {
   const dispatch = useDispatch();

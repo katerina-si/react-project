@@ -1,5 +1,5 @@
 import React from 'react';
-import UserListContainer from '../features/users/containers/UserListContainer';
+import UserListContainer from '../containers/UserListContainer';
 
 const Users = () => {
   return (

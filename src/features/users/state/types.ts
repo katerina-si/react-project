@@ -1,5 +1,0 @@
-import { REDUX_IDENTIFIER } from "../../../config";
-
-
-export const ALL_USERS_REQUEST = `${REDUX_IDENTIFIER}ALL_USERS_REQUEST`;
-export const ALL_USERS_SUCCESS = `${REDUX_IDENTIFIER}ALL_USERS_SUCCESS`;

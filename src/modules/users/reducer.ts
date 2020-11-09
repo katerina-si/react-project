@@ -1,18 +1,17 @@
-import * as types from './types';
+import * as types from './constants';
 import * as actions from './actions';
-import { InferValueTypes } from '../../../utils/types';
+import { InferValueTypes } from '../../utils/types';
 
 const initialState = {
-  data: [],
-  meta: {},
   loading: false,
 };
 
 type TActions = ReturnType<InferValueTypes <typeof actions>>;
 
+export type UserListState = Readonly<typeof initialState>
+
 const userReducer = (state = initialState, action: TActions) => {
   const { type, payload } = action;
-
   switch (type) {
     case types.ALL_USERS_REQUEST: {
       return {
