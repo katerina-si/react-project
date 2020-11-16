@@ -4,6 +4,7 @@ import { InferValueTypes } from '../../utils/types';
 
 const initialState = {
   loading: false,
+  data: []
 };
 
 type TActions = ReturnType<InferValueTypes <typeof actions>>;

@@ -1,12 +1,15 @@
-import { all, takeEvery, call } from 'redux-saga/effects'
+import { all, takeEvery, call, put } from 'redux-saga/effects'
 import * as types from './constants'
 import { fetchStudentsRequest } from "./services"
 import { mapUsersFromServer } from "./mappers"
 
-function* allUsersRequest() {
+
+function* AllUsersRequest() {
+  
   try {
-    const response = yield call(fetchStudentsRequest)
-    mapUsersFromServer()
+    const response = yield call(fetchStudentsRequest)    
+    const mappedUserList = mapUsersFromServer(response);
+    yield put({type:types.ALL_USERS_SUCCESS, payload: mappedUserList})
     console.log(response)
   } catch (e) {
     console.log(e)
@@ -16,6 +19,6 @@ function* allUsersRequest() {
   
 export default function* saga() {
   yield all([
-    takeEvery(types.ALL_USERS_REQUEST, allUsersRequest),
+    takeEvery(types.ALL_USERS_REQUEST, AllUsersRequest),
   ]);
 }

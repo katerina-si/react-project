@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import students from './Students';
+
 
 import styles from './UserList.module.scss'
-import Table, { ITableColumnItem, ITableDataSourceItem } from './table/Table';
-import { IStudent } from './Student.interface';
+import Table, { ITableColumnItem, ITableDataSourceItem } from '../table/Table';
+import students from '../students';
+import { IUser } from '../../services/models/User.interface';
 
 type Props = {
-  users: IStudent[];
+  users: IUser[];
 }
 
 interface State {
@@ -20,35 +21,41 @@ const UserList = ({ users }: Props) => {
     setState((state) => {
       return {
         ...state,
-        tableData: students.map((s: any) => {
+        tableData: users.map((s: IUser) => {
           return {
-            key: s.id,
-            firstName: s.firstName,
-            secondName: s.secondName,
-            bday: s.birthday,
-            email: s.email
+            key: s.uuid,
+            ...s
           } as ITableDataSourceItem
         })
       }
     });
 
-  }, [])
+  }, [users])
+
   const columns: ITableColumnItem[] = [
     {
       title: 'FirstName',
-      key: 'firstName',
+      key: 'firstname',
     },
     {
       title: 'SecondName',
-      key: 'secondName',
+      key: 'lastname',
     },
     {
       title: 'Birthday',
-      key: 'bday',
+      key: 'birthdate',
     },
     {
       title: 'Email',
       key: 'email',
+    },
+    {
+      title: 'Registration date',
+      key: 'registrationDate',
+    },
+    {
+      title: 'Gender',
+      key: 'gender',
     },
     {
       title: 'Action',

@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import UserList from '../components/UserList';
+import UserList from '../components/user-list/UserList';
 import * as actions from '../modules/users/actions';
 import * as selectors from '../modules/users/selectors';
 
