@@ -9,7 +9,8 @@ const UserListContainer = () => {
   const dispatch = useDispatch();
 
   const users = useSelector(selectors.usersList);
-  
+  const error = useSelector(selectors.usersListError);
+
   const getAllUsers = useCallback(() => {
     dispatch(actions.allUsersRequest());
   }, [dispatch]);
@@ -21,7 +22,7 @@ const UserListContainer = () => {
   return (
     <div className="fontSize-smaller">
       UserListContainer
-      <UserList users={users} />
+      {!error ? <UserList users={users} /> : error}
     </div>
 
   );

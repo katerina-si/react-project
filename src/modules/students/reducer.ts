@@ -5,23 +5,26 @@ import { InferValueTypes } from '../../utils/types';
 const initialState = {
   loading: false,
   data: [],
+  page: 0,
+  count: 0,
+  limit: 0,
   error: null
 };
 
 type TActions = ReturnType<InferValueTypes <typeof actions>>;
 
-export type UserListState = Readonly<typeof initialState>
+export type StudentListState = Readonly<typeof initialState>
 
-const userReducer = (state = initialState, action: TActions) => {
+const studentsReducer = (state = initialState, action: TActions) => {
   const { type, payload } = action;
   switch (type) {
-    case types.ALL_USERS_REQUEST: {
+    case types.ALL_STUDENTS_REQUEST: {
       return {
         ...state,
         loading: true,
       };
     }
-    case types.ALL_USERS_SUCCESS: {
+    case types.ALL_STUDENTS_SUCCESS: {
       return {
         ...state,
         ...payload,
@@ -29,7 +32,7 @@ const userReducer = (state = initialState, action: TActions) => {
         error: null
       };
     }
-    case types.ALL_USERS_ERROR: {
+    case types.ALL_STUDENTS_ERROR: {
       return {
         ...state,
         error: payload.message,
@@ -42,4 +45,4 @@ const userReducer = (state = initialState, action: TActions) => {
   }
 };
 
-export default userReducer;
+export default studentsReducer;

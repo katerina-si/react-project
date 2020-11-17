@@ -1,16 +1,16 @@
 import React from 'react';
 
 
-import styles from './UserList.module.scss'
+import styles from './StudentList.module.scss'
 import Table, { ITableColumnItem, ITableDataSourceItem } from '../table/Table';
-import { IUser } from '../../services/models/User.interface';
+import { IStudent } from '../../services/models/Student.interface';
 
 type Props = {
-  users: IUser[];
+  students: IStudent[];
 }
 
-const UserList = ({ users }: Props) => {
-  const tableData: ITableDataSourceItem[] = users.map((s: IUser) => {
+const StudentList = ({ students }: Props) => {
+  const tableData: ITableDataSourceItem[] = students.map((s: IStudent) => {
     return {
       key: s.uuid,
       ...s
@@ -20,23 +20,27 @@ const UserList = ({ users }: Props) => {
   const columns: ITableColumnItem[] = [
     {
       title: 'FirstName',
-      key: 'firstName',
+      key: 'firstname',
     },
     {
       title: 'SecondName',
-      key: 'lastName',
+      key: 'lastname',
     },
     {
-      title: 'Role',
-      key: 'role',
+      title: 'Birthday',
+      key: 'birthdate',
     },
     {
       title: 'Email',
       key: 'email',
     },
     {
-      title: 'Created date',
-      key: 'createdAt',
+      title: 'Registration date',
+      key: 'registrationDate',
+    },
+    {
+      title: 'Gender',
+      key: 'gender',
     },
     {
       title: 'Action',
@@ -53,4 +57,4 @@ const UserList = ({ users }: Props) => {
   );
 }
 
-export default UserList;
+export default StudentList;
