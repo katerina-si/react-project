@@ -1,5 +1,5 @@
 import request from "../../services/api/request";
 
-export const fetchStudentsRequest = () => {
-    return request.get('student');
+export const fetchUsersRequest = () => {
+    return request.get('user');
 }

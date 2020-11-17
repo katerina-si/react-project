@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import UserList from '../components/UserList';
+import UserList from '../components/user-list/UserList';
 import * as actions from '../modules/users/actions';
 import * as selectors from '../modules/users/selectors';
 
@@ -9,7 +9,8 @@ const UserListContainer = () => {
   const dispatch = useDispatch();
 
   const users = useSelector(selectors.usersList);
-  
+  const error = useSelector(selectors.usersListError);
+
   const getAllUsers = useCallback(() => {
     dispatch(actions.allUsersRequest());
   }, [dispatch]);
@@ -21,7 +22,7 @@ const UserListContainer = () => {
   return (
     <div className="fontSize-smaller">
       UserListContainer
-      <UserList users={users} />
+      {!error ? <UserList users={users} /> : error}
     </div>
 
   );

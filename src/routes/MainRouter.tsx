@@ -1,12 +1,14 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Users from "./Users";
+import Students from "./Students";
 
 const MainRouter = () => {
     return (
         <Switch>
-            <Redirect path="/" to="/users" />
             <Route path="/users" component={Users} />
+            <Route path="/students" component={Students} />
+            <Redirect path="/" to="/users" />
         </Switch>
     );
 };
