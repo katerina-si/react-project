@@ -1,8 +1,7 @@
 import React from 'react';
-
-
-import styles from './StudentList.module.scss'
-import Table, { ITableColumnItem, ITableDataSourceItem } from '../table/Table';
+import styles from './StudentList.module.scss';
+import { ITableColumnItem, ITableDataSourceItem } from '../table/Table';
+import { Table } from '../';
 import { IStudent } from '../../services/models/Student.interface';
 
 type Props = {
@@ -57,4 +56,4 @@ const StudentList = ({ students }: Props) => {
   );
 }
 
-export default StudentList;
+export { StudentList };

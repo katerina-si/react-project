@@ -36,4 +36,4 @@ const Table = ({ columns, dataSource }: Props) => {
         </table>
     );
 }
-export default Table;
+export {Table};

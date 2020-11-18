@@ -8,7 +8,10 @@ const initialState = {
   page: 0,
   count: 0,
   limit: 0,
-  error: null
+  error: null,
+  modalType: null,
+  modalProps: null,
+
 };
 
 type TActions = ReturnType<InferValueTypes <typeof actions>>;
@@ -37,6 +40,13 @@ const studentsReducer = (state = initialState, action: TActions) => {
         ...state,
         error: payload.message,
         loading: false,
+      };
+    }
+    case types.MODAL_OPENNING: {
+      console.log(payload)
+      return {
+        ...state,
+        ...payload,
       };
     }
 

@@ -1,8 +1,7 @@
 import React from 'react';
-
-
 import styles from './UserList.module.scss'
-import Table, { ITableColumnItem, ITableDataSourceItem } from '../table/Table';
+import { ITableColumnItem, ITableDataSourceItem } from '../table/Table';
+import { Table } from '../';
 import { IUser } from '../../services/models/User.interface';
 
 type Props = {
@@ -53,4 +52,4 @@ const UserList = ({ users }: Props) => {
   );
 }
 
-export default UserList;
+export {UserList};

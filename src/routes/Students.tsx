@@ -1,11 +1,11 @@
 import React from 'react';
-import StudentsListContainer from '../containers/StudentListContainer';
+import { StudentListContainer } from '../containers';
 
 const Students = () => {
   return (
     <div>
       Student page
-      <StudentsListContainer />
+      <StudentListContainer />
     </div>
   );
 }
