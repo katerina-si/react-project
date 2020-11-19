@@ -8,9 +8,8 @@ import * as actions from '../../modules/modal/actions';
 type Props = {
   message: string;
   confirmBtnTitle: string;
-  actionIsConfirmed: any
 }
-const ConfirmationForm = ({ message, confirmBtnTitle, actionIsConfirmed }: Props) => {
+const ConfirmationForm = ({ message, confirmBtnTitle }: Props) => {
   const dispatch = useDispatch();
 
   const onConfirmAction = () => {

@@ -11,7 +11,7 @@ type Props = {
 const StudentDetailsContainer = ({ student }: Props) => {
     const dispatch = useDispatch();
 
-    const onSave = (model: any) => {
+    const onSave = (model: IStudent) => {
         console.log(model);
         dispatch(actions.modalClosing());
     };

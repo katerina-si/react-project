@@ -11,7 +11,7 @@ type Props = {
 const UserDetailsContainer = ({ user }: Props) => {
     const dispatch = useDispatch();
 
-    const onSave = (model: any) => {
+    const onSave = (model: IUser) => {
         console.log(model);
         dispatch(actions.modalClosing());
     };

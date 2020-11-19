@@ -14,10 +14,10 @@ const tailLayout = {
 
 type Props = {
   user?: IUser;
-  onSendModel: any
+  onSendModel: (form: IUser) => void
 }
 const UserDetailsForm = ({ user, onSendModel }: Props) => {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<IUser>();
   const [isNewUser, setIsNewUser] = useState(true);
   const [role, setRole] = useState();
   const roleList = ['user', 'master', 'admin'];
@@ -29,8 +29,8 @@ const UserDetailsForm = ({ user, onSendModel }: Props) => {
     }
   }, [user]);
 
-  const onSend = (values: any) => {
-    onSendModel(values)
+  const onSend = (form: IUser) => {
+    onSendModel(form)
   };
   const onRoleChange = (value: any) => {
     form.setFieldsValue({ role: value });

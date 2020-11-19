@@ -19,10 +19,10 @@ format(new Date(2014, 1, 11), 'yyyy-MM-dd')
 
 type Props = {
   student?: IStudent;
-  onSendModel: any
+  onSendModel: (form: IStudent) => void
 }
 const StudentDetailsForm = ({ student, onSendModel }: Props) => {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<IStudent>();
   const [gender, setGender] = useState('male');
   const [startDate, setStartDate] = useState(new Date());
   const [isNewStudent, setIsNewStudent] = useState(true);
@@ -37,8 +37,8 @@ const StudentDetailsForm = ({ student, onSendModel }: Props) => {
     } 
   }, [student]);
 
-  const onSend = (values: any) => {    
-    onSendModel(values)
+  const onSend = (form: IStudent) => {    
+    onSendModel(form)
   };
   const onGenderChange = (value: any) => {
     form.setFieldsValue({ gender: value });
