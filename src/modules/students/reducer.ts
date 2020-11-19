@@ -9,9 +9,6 @@ const initialState = {
   count: 0,
   limit: 0,
   error: null,
-  modalType: null,
-  modalProps: null,
-  actionIsConfirmed: null
 };
 
 type TActions = ReturnType<InferValueTypes <typeof actions>>;
