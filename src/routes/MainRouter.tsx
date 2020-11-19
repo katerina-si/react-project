@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Users from "./Users";
-import Students from "./Students";
+import Students from './Students';
 
 const MainRouter = () => {
     return (

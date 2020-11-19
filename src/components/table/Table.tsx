@@ -29,7 +29,7 @@ const Table = ({ columns, dataSource }: Props) => {
                     <tr key={item.key}>
                         {columns.map((c) => {
                             const field = item[`${c.key}`];
-                            return <td key={c.key}>{c.render ? c.render(field) : field}</td>
+                            return <td key={c.key}>{c.render ? c.render(item) : field}</td>
                         })}
                     </tr>)}
             </tbody>

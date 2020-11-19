@@ -1,25 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Modal.module.scss';
-import { IStudent } from '../../services/models/Student.interface';
-
-import Modal from 'react-modal';
 import { useSelector } from 'react-redux';
-import * as actions from '../../modules/students/actions';
-import * as selectors from '../../modules/students/selectors';
-import { ConfirmationForm } from '../confirmation-form/ConfirmationForm';
+import * as selectors from '../../modules/modal/selectors';
+import { ConfirmationForm } from '../';
 import { StudentDetailsContainer } from '../../containers/StudentDetailsContainer';
-type Props = {
-  modalType?: any;
-  modalProps?: any
-}
+import { UserDetailsContainer } from '../../containers/UserDetailsContainer';
+
+export const MODAL_COMPONENTS_TYPES = {
+  NEW_STUDENT_CREATING: 'NEW_STUDENT_CREATING',
+  NEW_USER_CREATING: 'NEW_USER_CREATING',
+  CONFIRM_ACTION: 'CONFIRM_ACTION'
+};
 
 export const MODAL_COMPONENTS = {
-  NEW_STUDENT_CREATING: StudentDetailsContainer,
-  DELETE_STUDENT: ConfirmationForm
+  [MODAL_COMPONENTS_TYPES.NEW_STUDENT_CREATING]: StudentDetailsContainer,
+  [MODAL_COMPONENTS_TYPES.NEW_USER_CREATING]: UserDetailsContainer,
+  [MODAL_COMPONENTS_TYPES.CONFIRM_ACTION]: ConfirmationForm
 };
+
+
 const RootModal = () => {
   const modalType = useSelector(selectors.modalType);
   const modalProps = useSelector(selectors.modalProps);
+
   if (!modalType) {
     return null;
   }
@@ -31,4 +34,4 @@ const RootModal = () => {
   );
 }
 
-export { RootModal };
+export default RootModal;

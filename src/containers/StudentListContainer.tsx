@@ -2,9 +2,13 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../modules/students/actions';
 import * as selectors from '../modules/students/selectors';
+import * as modalActions from '../modules/modal/actions';
+import * as modalSelectors from '../modules/modal/selectors';
 import { StudentList } from '../components';
 import Modal from 'react-modal';
-import { RootModal } from '../components/modal/Modal';
+import RootModal, { MODAL_COMPONENTS_TYPES } from '../components/modal/Modal';
+import { IStudent } from '../services/models/Student.interface';
+import { Button } from 'antd';
 
 const customStyles = {
   content: {
@@ -19,7 +23,7 @@ const customStyles = {
 
 const StudentListContainer = () => {
   const dispatch = useDispatch();
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const modalIsOpen = useSelector(modalSelectors.modalType) ? true : false;
 
   const students = useSelector(selectors.studentList);
   const error = useSelector(selectors.studentListError);
@@ -30,33 +34,33 @@ const StudentListContainer = () => {
 
   useEffect(() => {
     getAllStudents();
+    Modal.setAppElement('body');
   }, [getAllStudents]);
 
-
-  function openModal() {
-    dispatch(actions.showModal({ modalType: 'DELETE_POST', modalProps: { student: students[0] } }));
-    setModalIsOpen(true);
+  const setModalIsOpen = () => {
+    dispatch(modalActions.modalClosing());
   }
 
-  function onOpenDeletingStudent() {
-    dispatch(actions.showModal({
-      modalType: 'DELETE_STUDENT', modalProps: {
-        message: 'Are you sure that you want to delete the student?',
-        confirmBtnTitle: 'Delete'
-      }
+  const onOpenCeratingStudent = () => {
+    dispatch(modalActions.modalOpenning({
+      modalType: MODAL_COMPONENTS_TYPES.NEW_STUDENT_CREATING,
+      modalProps: null
     }));
-    setModalIsOpen(true);
+  }
+
+  const onDeleteStudent = (event: IStudent) => {
+    console.log(event)
   }
 
   return (
     <div className="fontSize-smaller">
-      StudentsListContainer
-      {!error ? <StudentList students={students} /> : error}
-      <button onClick={openModal}>Open Modal</button>
-      <button onClick={onOpenDeletingStudent}>Delete Modal</button>
+      <div>StudentsListContainer</div>
+      <Button type="primary"  shape="round" onClick={onOpenCeratingStudent}>Add new student</Button>
+      {!error ? <StudentList students={students} onDeleteStudent={onDeleteStudent} /> : error}
+
       <Modal
         isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
+        onRequestClose={setModalIsOpen}
         style={customStyles}
         contentLabel="Example Modal"
       >   <RootModal></RootModal></Modal>

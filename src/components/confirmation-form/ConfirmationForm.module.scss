@@ -1,0 +1,17 @@
+.FormTitle {
+    text-align: center;
+    padding-bottom: 10px;
+}
+.FormContainer {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+}
+.ActionContainer {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    button{
+        margin-right: 10px;}
+}

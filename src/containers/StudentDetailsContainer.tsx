@@ -2,18 +2,23 @@ import React, { useState, useEffect } from 'react';
 import "react-datepicker/dist/react-datepicker.css";
 import { StudentDetailsForm } from '../components';
 import { IStudent } from '../services/models/Student.interface';
+import { useDispatch } from 'react-redux';
+import * as actions from '../modules/modal/actions';
 
 type Props = {
-  student: IStudent;
+    student?: IStudent;
 }
 const StudentDetailsContainer = ({ student }: Props) => {
-  const onSave = (model: any) => {
-    console.log(model);
-  };
+    const dispatch = useDispatch();
 
-  return (
-    <StudentDetailsForm student={student} onSendModel={onSave}></StudentDetailsForm>
-  );
+    const onSave = (model: any) => {
+        console.log(model);
+        dispatch(actions.modalClosing());
+    };
+
+    return (
+        <StudentDetailsForm student={student} onSendModel={onSave}></StudentDetailsForm>
+    );
 }
 
 export { StudentDetailsContainer };

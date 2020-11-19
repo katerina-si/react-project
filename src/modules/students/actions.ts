@@ -14,8 +14,3 @@ export const allStudentsError = (payload: { message: string, meta: any }): TActi
   type: types.ALL_STUDENTS_ERROR,
   payload,
 });
-
-export const modalOpenning = (payload: { modalType: string, modalProps: any }): TAction => ({
-  type: types.MODAL_OPENNING,
-  payload,
-});
