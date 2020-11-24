@@ -5,7 +5,6 @@ import { BrowserRouter as Router } from "react-router-dom"
 import configureStore from './store';
 import './App.css';
 import MainRouter from "./routes/MainRouter";
-import 'antd/dist/antd.css';
 
 export const store = configureStore();
 

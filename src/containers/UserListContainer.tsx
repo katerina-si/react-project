@@ -8,7 +8,6 @@ import * as modalActions from '../modules/modal/actions';
 import * as modalSelectors from '../modules/modal/selectors';
 import { UserList } from '../components';
 import { IUser } from '../services/models/User.interface';
-import { Button } from 'antd';
 
 const customStyles = {
   content: {
@@ -56,7 +55,7 @@ const UserListContainer = () => {
   return (
     <div className="fontSize-smaller">
       <div>UserListContainer</div>
-      <Button type="primary"  shape="round"onClick={onOpenCeratingUser}>Add new user</Button>
+      <button className='Primary' onClick={onOpenCeratingUser}>Add new user</button>
       {!error ? <UserList users={users}  onDeleteUser={onDeleteUser}/> : error}
       <Modal
         isOpen={modalIsOpen}

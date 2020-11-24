@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './ConfirmationForm.module.scss';
-import { Button } from 'antd';
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch } from 'react-redux';
 import * as actions from '../../modules/modal/actions';
@@ -28,12 +27,12 @@ const ConfirmationForm = ({ message, confirmBtnTitle }: Props) => {
         {message}
       </span>
       <div className={styles.ActionContainer}>
-      <Button type="primary" shape="round" onClick={onConfirmAction}>
+      <button className='Primary' onClick={onConfirmAction}>
         {confirmBtnTitle}
-      </Button>
-      <Button shape="round" onClick={onCancelAction}>
+      </button>
+      <button  className='Default' onClick={onCancelAction}>
         Cancel
-        </Button></div></div>
+        </button></div></div>
 
   );
 }

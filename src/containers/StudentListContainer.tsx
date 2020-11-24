@@ -8,7 +8,6 @@ import { StudentList } from '../components';
 import Modal from 'react-modal';
 import RootModal, { MODAL_COMPONENTS_TYPES } from '../components/modal/Modal';
 import { IStudent } from '../services/models/Student.interface';
-import { Button } from 'antd';
 
 const customStyles = {
   content: {
@@ -55,7 +54,7 @@ const StudentListContainer = () => {
   return (
     <div className="fontSize-smaller">
       <div>StudentsListContainer</div>
-      <Button type="primary"  shape="round" onClick={onOpenCeratingStudent}>Add new student</Button>
+      <button className='Primary' onClick={onOpenCeratingStudent}>Add new student</button>
       {!error ? <StudentList students={students} onDeleteStudent={onDeleteStudent} /> : error}
 
       <Modal

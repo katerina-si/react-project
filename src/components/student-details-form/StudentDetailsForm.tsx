@@ -1,104 +1,115 @@
 import React, { useState, useEffect } from 'react';
 import styles from './StudentDetailsForm.module.scss';
 import { IStudent } from '../../services/models/Student.interface';
-import { Button, Form, Input, Select } from 'antd';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { compareAsc, format } from 'date-fns'
+import { Form, Field } from 'react-final-form'
 
-const { Option } = Select;
-const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 },
-};
-const tailLayout = {
-  wrapperCol: { offset: 6, span: 18 },
-};
-
-format(new Date(2014, 1, 11), 'yyyy-MM-dd')
+const required = (value: any) => (value ? undefined : 'Required');
 
 type Props = {
   student?: IStudent;
   onSendModel: (form: IStudent) => void
 }
+
 const StudentDetailsForm = ({ student, onSendModel }: Props) => {
-  const [form] = Form.useForm<IStudent>();
-  const [gender, setGender] = useState('male');
-  const [startDate, setStartDate] = useState(new Date());
+  const [form, setForm] = useState({
+    birthdate: new Date(),
+    email: "",
+    firstname: "",
+    gender: "",
+    lastname: ""
+  });
+
   const [isNewStudent, setIsNewStudent] = useState(true);
   const genderList = ['male', 'female'];
 
   useEffect(() => {
     if (student) {
-      setIsNewStudent(false);
-      setStartDate(new Date(student.birthdate))
-      setGender(student.gender)
-      form.setFieldsValue({ ...student });
-    } 
+      setForm({ ...student, birthdate: new Date(student.birthdate) });
+      setIsNewStudent(false)
+    }
   }, [student]);
 
-  const onSend = (form: IStudent) => {    
+  const onSend = (form: IStudent) => {
     onSendModel(form)
-  };
-  const onGenderChange = (value: any) => {
-    form.setFieldsValue({ gender: value });
-    setGender(value)
   };
 
   return (
-    <div>
-      <h2 className={styles.FormTitle}>Student details</h2>
+    <div
+    className={styles.FormContainer}>
+      <label className={styles.FormTitle}>Student details</label>
       <Form
-        {...layout}
-        form={form}
-        className={styles.FormContainer}
-        name="basic"
-        onFinish={onSend}>
-        <Form.Item
-          className={styles.InputContainer}
-          label="First name"
-          name="firstname"
-          rules={[{ required: true, message: 'Please input first name!' }]}>
-          <Input />
-        </Form.Item>
+        onSubmit={onSend}
+        initialValues={form}
+        render={({ handleSubmit, form, submitting, pristine, values }) => (
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <Field name="firstname" validate={required}>
+              {({ input, meta }) => (
+                <div>
+                  <label>First Name</label>
+                  <div className={styles.FieldContainer}>
+                    <input {...input} type="text" placeholder="First Name" />
+                    {meta.error && meta.touched && <span
+                      className={styles.Error}>{meta.error}</span>}</div>
+                </div>
+              )}
+            </Field>
 
-        <Form.Item
-          label="Second name"
-          name="lastname"
-          rules={[{ required: true, message: 'Please input second name!' }]}>
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Birthday"
-          name="birthdate"
-          rules={[{ required: true }]}>
-          <DatePicker selected={startDate} onChange={(date: any) => setStartDate(date)} /></Form.Item>
+            <Field name="lastname" validate={required}>
+              {({ input, meta }) => (
+                <div>
+                  <label>Last </label>
+                  <div className={styles.FieldContainer}>
+                    <input {...input} type="text" placeholder="Last Name" />
+                    {meta.error && meta.touched && <span
+                      className={styles.Error}>{meta.error}</span>}</div>
+                </div>
+              )}
+            </Field>
 
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[{ required: true, message: 'Please input email!' }]}>
-          <Input />
-        </Form.Item>
+            <Field name="birthdate" validate={required}>
+              {({ input, meta }) => (
+                <div>
+                  <label>Birthdate</label>
+                  <div className={styles.FieldContainer}>
+                    <DatePicker selected={input.value} onChange={input.onChange} />
+                  </div>
+                </div>
+              )}
+            </Field>
 
-        <Form.Item
-          label="Gender"
-          name="gender"
-          rules={[{ required: true, message: 'Please input gender!' }]}>
-          <Select
-            onChange={onGenderChange}
-            value={gender}
-            allowClear>   {
-              genderList.map(g => <Option key={g} value={g}>{g}</Option>)
-            }
-          </Select>
-        </Form.Item>
-        <Form.Item {...tailLayout}>
-          <Button type="primary"  shape="round" htmlType="submit">
-            {isNewStudent ? 'Add' : 'Save'}
-          </Button>
-        </Form.Item>
-      </Form>
+            <Field name="email" validate={required}>
+              {({ input, meta }) => (
+                <div>
+                  <label>Email</label>
+                  <div className={styles.FieldContainer}>
+                    <input {...input} type="text" placeholder="Email" />
+                    {meta.error && meta.touched && <span
+                      className={styles.Error}>{meta.error}</span>}</div>
+                </div>
+              )}
+            </Field>
+
+            <div>
+              <label>Gender</label>
+              <div className={styles.FieldContainer}>
+                <Field name="gender" component="select" >
+                  <option />
+                  {genderList.map(g => <option key={g} value={g}>{g}</option>)}
+                </Field>
+              </div>
+            </div>
+
+            <div className={styles.FormActions}>
+              <button className='Primary'  type="submit" disabled={submitting}>
+                {isNewStudent ? 'Add' : 'Save'}
+              </button>
+            </div>
+          </form>
+        )}
+      />
+
     </div>
 
   );

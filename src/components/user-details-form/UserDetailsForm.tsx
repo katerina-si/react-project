@@ -1,93 +1,104 @@
 import React, { useState, useEffect } from 'react';
 import styles from './UserDetailsForm.module.scss';
-import { Button, Form, Input, Select } from 'antd';
 import { IUser } from '../../services/models/User.interface';
+import { Form, Field } from 'react-final-form'
 
-const { Option } = Select;
-const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 },
-};
-const tailLayout = {
-  wrapperCol: { offset: 6, span: 18 },
-};
+const required = (value: any) => (value ? undefined : 'Required');
 
 type Props = {
   user?: IUser;
   onSendModel: (form: IUser) => void
 }
 const UserDetailsForm = ({ user, onSendModel }: Props) => {
-  const [form] = Form.useForm<IUser>();
   const [isNewUser, setIsNewUser] = useState(true);
-  const [role, setRole] = useState();
   const roleList = ['user', 'master', 'admin'];
+  const [form, setForm] = useState({
+    email: "",
+    firstName: "",
+    role: "",
+    lastName: ""
+  });
+
 
   useEffect(() => {
     if (user) {
-      setIsNewUser(false);
-      form.setFieldsValue({ ...user });
+      setForm({ ...user });
+      setIsNewUser(false)
     }
   }, [user]);
 
   const onSend = (form: IUser) => {
     onSendModel(form)
   };
-  const onRoleChange = (value: any) => {
-    form.setFieldsValue({ role: value });
-    setRole(value)
-  };
 
   return (
-    <div>
-      <h2 className={styles.FormTitle}>User details</h2>
+
+    <div
+      className={styles.FormContainer}>
+      <label className={styles.FormTitle}>Student details</label>
       <Form
-        {...layout}
-        form={form}
-        className={styles.FormContainer}
-        name="basic"
-        onFinish={onSend}>
-        <Form.Item
-          className={styles.InputContainer}
-          label="First name"
-          name="firstName"
-          rules={[{ required: true, message: 'Please input first name!' }]}>
-          <Input />
-        </Form.Item>
+        onSubmit={onSend}
+        initialValues={form}
+        render={({ handleSubmit, form, submitting, pristine, values }) => (
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <Field name="firstName" validate={required}>
+              {({ input, meta }) => (
+                <div>
+                  <label>First Name</label>
+                  <div className={styles.FieldContainer}>
+                    <input {...input} type="text" placeholder="First Name" />
+                    {meta.error && meta.touched && <span
+                      className={styles.Error}>{meta.error}</span>}</div>
+                </div>
+              )}
+            </Field>
 
-        <Form.Item
-          label="Second name"
-          name="lastName"
-          rules={[{ required: true, message: 'Please input second name!' }]}>
-          <Input />
-        </Form.Item>
+            <Field name="lastName" validate={required}>
+              {({ input, meta }) => (
+                <div>
+                  <label>Last </label>
+                  <div className={styles.FieldContainer}>
+                    <input {...input} type="text" placeholder="Last Name" />
+                    {meta.error && meta.touched && <span
+                      className={styles.Error}>{meta.error}</span>}</div>
+                </div>
+              )}
+            </Field>
 
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[{ required: true, message: 'Please input email!' }]}>
-          <Input />
-        </Form.Item>
 
-        <Form.Item
-          label="Role"
-          name="role"
-          rules={[{ required: true, message: 'Please input role!' }]}>
-          <Select
-            onChange={onRoleChange}
-            value={role}
-            allowClear>   {
-              roleList.map(g => <Option key={g} value={g}>{g}</Option>)
-            }
-          </Select>
-        </Form.Item>
-        <Form.Item {...tailLayout}>
-          <Button type="primary"  shape="round" htmlType="submit">
-            {isNewUser ? 'Add' : 'Save'}
-          </Button>
-        </Form.Item>
-      </Form>
+            <Field name="email" validate={required}>
+              {({ input, meta }) => (
+                <div>
+                  <label>Email</label>
+                  <div className={styles.FieldContainer}>
+                    <input {...input} type="text" placeholder="Email" />
+                    {meta.error && meta.touched && <span
+                      className={styles.Error}>{meta.error}</span>}</div>
+                </div>
+              )}
+            </Field>
+
+            <div>
+              <label>Role</label>
+              <div className={styles.FieldContainer}>
+                <Field name="role" component="select" >
+                  <option />
+                  {roleList.map(g => <option key={g} value={g}>{g}</option>)}
+                </Field>
+              </div>
+            </div>
+
+            <div className={styles.FormActions}>
+              <button className='Primary' type="submit" disabled={submitting}>
+                {isNewUser ? 'Add' : 'Save'}
+              </button>
+            </div>
+          </form>
+        )}
+      />
 
     </div>
+
 
   );
 }
