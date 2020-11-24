@@ -22,7 +22,7 @@ const ConfirmationForm = ({ message, confirmBtnTitle }: Props) => {
 
   return (
     <div  className={styles.FormContainer}>
-      <h2 className={styles.FormTitle}>Confirm action</h2>
+      <label className={styles.FormTitle}>Confirm action</label>
       <span>
         {message}
       </span>
