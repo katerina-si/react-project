@@ -1,13 +1,15 @@
 import { all, takeEvery, call, put } from 'redux-saga/effects'
 import * as types from './constants'
-import { fetchStudentsRequest } from "./services"
+import { fetchStudentsRequest, IStudentParams } from "./services"
 import { allStudentsSuccess, allStudentsError } from './actions'
 import { mapStudentsFromServer } from './mappers'
+import { IStudent } from '../../services/models/Student.interface'
+import { PayloadAction } from '@reduxjs/toolkit'
 
 
-function* AllStudentsRequest() {
+function* AllStudentsRequest(data: PayloadAction<IStudentParams>) {
   try {
-    const response = yield call(fetchStudentsRequest)
+    const response = yield call(fetchStudentsRequest, data.payload)
     yield put(allStudentsSuccess(mapStudentsFromServer(response)))
   } catch (e) {
     yield put(allStudentsError(e))

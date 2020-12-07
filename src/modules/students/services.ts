@@ -1,5 +1,8 @@
 import request from "../../services/api/request";
-
-export const fetchStudentsRequest = () => {
-    return request.get('student');
+export interface IStudentParams {
+    page: number,
+    limit: number
+}
+export const fetchStudentsRequest = (params: IStudentParams) => {
+    return request.get('student', {params: params});
 }

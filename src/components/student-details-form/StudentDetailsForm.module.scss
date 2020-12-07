@@ -1,0 +1,65 @@
+.FormContainer {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 490px;
+}
+.FormTitle {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+.FormActions {
+  justify-content: center;
+}
+.Error {
+  font-size: 0.6em;
+  font-weight: 600;
+  color: #ff4d4f;
+  margin-top: 24px;
+  position: absolute;
+}
+form {
+  padding: 10px;
+
+  & > div {
+    display: flex;
+    flex-flow: row nowrap;
+    line-height: 2em;
+    margin: 5px;
+    & > .FieldContainer {
+      margin-bottom: 15px;
+      flex: 1 1;
+      font-size: 1em;
+      margin-left: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      & > label {
+        color: #333;
+        width: 110px;
+        font-size: 1em;
+        line-height: 32px;
+      }
+      input {
+        flex: 1;
+        padding: 5px 5px;
+        margin-left: 15px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        width: 350px;
+        font-size: 1em;
+      }
+
+      & > select {
+        flex: 1;
+        width: 360px !important;
+        padding: 5px 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 1em;
+      }
+    }
+  }
+}

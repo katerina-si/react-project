@@ -1,15 +1,16 @@
-import React from 'react';
-
-
+import React, { useState, useEffect } from 'react';
 import styles from './UserList.module.scss'
-import Table, { ITableColumnItem, ITableDataSourceItem } from '../table/Table';
+import { ITableColumnItem, ITableDataSourceItem } from '../table/Table';
+import { Table } from '../';
 import { IUser } from '../../services/models/User.interface';
 
 type Props = {
   users: IUser[];
+  onOpenUserDetails: (value: any) => void
+  onOpenConfirmModal: (value: any) => void
 }
 
-const UserList = ({ users }: Props) => {
+const UserList = ({ users, onOpenConfirmModal, onOpenUserDetails }: Props) => {
   const tableData: ITableDataSourceItem[] = users.map((s: IUser) => {
     return {
       key: s.uuid,
@@ -39,18 +40,25 @@ const UserList = ({ users }: Props) => {
       key: 'createdAt',
     },
     {
-      title: 'Action',
+      title: '',
       key: 'action',
-      render: () => <button>edit</button>,
+      render: (item) => { return <button onClick={() => onOpenUserDetails(item)}>edit</button> },
+    },
+    {
+      title: '',
+      key: 'actionTwo',
+      render: (item) => { return <button onClick={() => onOpenConfirmModal(item)}>delete</button> },
     },
   ];
+
+  
 
   return (
     <div className="fontSize-smaller">
       <span className={styles.main}>UserList</span>
-      {tableData.length > 0 ? <Table dataSource={tableData} columns={columns}></Table> : null}
+      {tableData.length > 1 && <Table dataSource={tableData} columns={columns} ></Table>}
     </div>
   );
 }
 
-export default UserList;
+export {UserList};

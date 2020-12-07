@@ -1,12 +1,50 @@
 .App {
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   font-size: calc(14px + 2vmin);
   color: white;
+  min-height: 100vh;
+}
+
+.App>div{
+  width: 100%;
+}
+
+
+button.Primary {
+  background-color:#1890ff;
+  cursor: pointer;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  border-radius: 20px;
+  min-width: 100px;
+  display: inline-block;
+
+}
+
+button.Primary:hover {
+  background-color:#40a9ff;
+}
+
+button.Default {
+  cursor: pointer;
+  color: rgba(0,0,0,.85);
+  border: 1px solid  rgba(0,0,0,.85);
+  padding: 0.5rem 1rem;
+  text-align: center;
+  border-radius: 20px;
+  min-width: 100px;
+  display: inline-block;
+}
+
+button.Default:hover {
+  border: 1px solid  #40a9ff;
+  color: #40a9ff;
 }
 
 .fontSize-smaller {

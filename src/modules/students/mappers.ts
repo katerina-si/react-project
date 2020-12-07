@@ -6,9 +6,9 @@ export function mapStudentFromServer(student: IStudent) {
     } 
 }
 
-export function mapStudentsFromServer(response: {data: IStudent[], meta: any}) {
+export function mapStudentsFromServer(response: {data: IStudent[], [key: string]: any}) {
     return {
+        ...response,
         data: response.data.map(mapStudentFromServer),
-        ...response.meta
     } 
 }
