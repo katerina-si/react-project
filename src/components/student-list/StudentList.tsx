@@ -1,19 +1,24 @@
 import React from 'react';
-
-
-import styles from './StudentList.module.scss'
-import Table, { ITableColumnItem, ITableDataSourceItem } from '../table/Table';
+import styles from './StudentList.module.scss';
+import { ITableColumnItem, ITableDataSourceItem } from '../table/Table';
+import { TableWithPaginator } from '../';
 import { IStudent } from '../../services/models/Student.interface';
+import { Paginator } from '../table-with-paginator/PaginatorConfig';
 
 type Props = {
   students: IStudent[];
+  paginatorState: Paginator;
+  onOpenStudentDetails: (value: any) => void
+  onOpenConfirmModal: (value: any) => void
+  onChangePage: (value: any) => void
+  onChangeLimit: (value: any) => void
 }
 
-const StudentList = ({ students }: Props) => {
-  const tableData: ITableDataSourceItem[] = students.map((s: IStudent) => {
+const StudentList = ({ students, onOpenStudentDetails, onOpenConfirmModal, onChangePage, onChangeLimit, paginatorState }: Props) => {
+  const tableData: ITableDataSourceItem[] = students.map((student: IStudent) => {
     return {
-      key: s.uuid,
-      ...s
+      key: student.uuid,
+      ...student
     }
   });
 
@@ -43,18 +48,30 @@ const StudentList = ({ students }: Props) => {
       key: 'gender',
     },
     {
-      title: 'Action',
+      title: '',
       key: 'action',
-      render: () => <button>edit</button>,
+      render: (item) => { return <button onClick={() => onOpenStudentDetails(item)}>edit</button> },
+    },
+    {
+      title: '',
+      key: 'actionTwo',
+      render: (item) => { return <button onClick={() => onOpenConfirmModal(item)}>delete</button> },
     },
   ];
 
   return (
     <div className="fontSize-smaller">
-      <span className={styles.main}>UserList</span>
-      {tableData.length > 0 ? <Table dataSource={tableData} columns={columns}></Table> : null}
+      <span className={styles.main}>StudentList</span>
+      {tableData.length > 1 &&
+        <TableWithPaginator
+          dataSource={tableData}
+          columns={columns}
+          paginatorState={paginatorState}
+          onChangePage={onChangePage}
+          onChangeLimit={onChangeLimit}/>
+      }
     </div>
   );
 }
 
-export default StudentList;
+export { StudentList };

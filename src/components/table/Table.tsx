@@ -15,25 +15,25 @@ type Props = {
     dataSource: ITableDataSourceItem[];
 }
 
-const Table = ({ columns, dataSource }: Props) => {
 
+const Table = ({ columns, dataSource }: Props) => {
     return (
         <table className={styles.table}>
             <thead>
                 <tr>
-                    {columns.map((c) => <th key={c.key}>{c.title}</th>)}
+                    {columns.map((column) => <th key={column.key}>{column.title}</th>)}
                 </tr>
             </thead>
             <tbody>
                 {dataSource.map((item) =>
                     <tr key={item.key}>
-                        {columns.map((c) => {
-                            const field = item[`${c.key}`];
-                            return <td key={c.key}>{c.render ? c.render(field) : field}</td>
+                        {columns.map((column) => {
+                            const field = item[`${column.key}`];
+                            return <td key={column.key}>{column.render ? column.render(item) : field}</td>
                         })}
                     </tr>)}
             </tbody>
         </table>
     );
 }
-export default Table;
+export { Table };

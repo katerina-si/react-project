@@ -1,0 +1,2 @@
+export const MODAL_OPENNING = `MODAL_OPENNING`;
+export const MODAL_CLOSING = `MODAL_CLOSING`;

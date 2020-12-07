@@ -5,10 +5,10 @@ import { InferValueTypes } from '../../utils/types';
 const initialState = {
   loading: false,
   data: [],
-  page: 0,
+  page: 1,
   count: 0,
-  limit: 0,
-  error: null
+  limit: 10,
+  error: null,
 };
 
 type TActions = ReturnType<InferValueTypes <typeof actions>>;
@@ -21,6 +21,7 @@ const studentsReducer = (state = initialState, action: TActions) => {
     case types.ALL_STUDENTS_REQUEST: {
       return {
         ...state,
+        ...payload,        
         loading: true,
       };
     }
