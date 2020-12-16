@@ -23,8 +23,7 @@ const modalReducer = (state = initialState, action: TActions) => {
     }
     case types.MODAL_CLOSING: {
       return {
-        ...state,
-        ...payload,
+        ...initialState,
       };
     }
 

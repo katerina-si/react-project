@@ -3,6 +3,7 @@ import styles from './StudentDetailsForm.module.scss';
 import { IStudent } from '../../services/models/Student.interface';
 import { Form, Field } from 'react-final-form'
 import { Datepicker } from '..';
+import { getCurrentDate } from '../../utils/date';
 
 const required = (value: any) => (value ? undefined : 'Required');
 
@@ -13,7 +14,12 @@ type Props = {
 
 const StudentDetailsForm = ({ student, onSendModel }: Props) => {
   const genderList = ['male', 'female'];
-
+  const newStudent = {
+    birthdate: getCurrentDate(),
+    registrationDate: getCurrentDate(),
+    ip: "0.0.0.0",
+  }
+  
   const onSend = (form: IStudent) => {
     onSendModel(form)
   };
@@ -24,7 +30,7 @@ const StudentDetailsForm = ({ student, onSendModel }: Props) => {
       <label className={styles.FormTitle}>Student details</label>
       <Form
         onSubmit={onSend}
-        initialValues={student}
+        initialValues={student || newStudent}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={(e) => handleSubmit(e)}>
             <Field name="firstname" validate={required}>
@@ -51,7 +57,7 @@ const StudentDetailsForm = ({ student, onSendModel }: Props) => {
               )}
             </Field>
 
-            <Field name="birthdate" validate={required}>
+            <Field name="birthdate">
               {({ input, meta }) => (
                 <div>
                   <label>Birthdate</label>

@@ -7,18 +7,14 @@ import { StudentList } from '../components';
 import { IStudent } from '../services/models/Student.interface';
 import { IStudentParams } from '../modules/students/services';
 import { useHistory } from "react-router-dom";
-import { useQuery } from '../App';
-import qs from 'qs';
 import { Confirmations } from '../components/confirmation-form/Confirmations';
 import { MODAL_COMPONENTS_TYPES } from '../components/modal-manager/ModalManager';
 import { defaultPaginationState } from '../components/table-with-paginator/PaginatorConfig';
-
+import { GetLimitAndPageParams, GetUrlParams } from '../utils/queryString';
 
 const StudentListContainer = () => {
   let history = useHistory();
-  const query = useQuery();
-  const { limit = defaultPaginationState.limit, page = defaultPaginationState.page }
-    = qs.parse(query.toString());
+  const { limit, page } = GetLimitAndPageParams();
 
   const dispatch = useDispatch();
   const students = useSelector(selectors.studentList);
@@ -28,7 +24,6 @@ const StudentListContainer = () => {
   useEffect(() => {
     dispatch(actions.allStudentsRequest({ limit: +limit, page: +page }));
   }, [limit, page]);
-
 
   const onOpenCeratingStudent = () => {
     dispatch(modalActions.modalOpenning({
@@ -56,7 +51,7 @@ const StudentListContainer = () => {
   }
 
   const onSetParams = (params: IStudentParams) => {
-    history.push({ search: qs.stringify(params) });
+    history.push({ search: GetUrlParams(params) });
   }
 
   const renderContent = () => {

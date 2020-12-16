@@ -9,9 +9,6 @@ import { ModalContainer } from './containers';
 
 export const store = configureStore();
 
-export function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
 function App() {
   return (
     <div className="App">

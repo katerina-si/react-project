@@ -1,11 +1,12 @@
 import * as types from './constants';
 import { TAction } from '../../utils/types';
+import { IUser } from '../../services/models/User.interface';
 
 export const allUsersRequest = (): TAction => ({
   type: types.ALL_USERS_REQUEST,
 });
 
-export const allUsersSuccess = (payload: { data: any[], meta: any }): TAction => ({
+export const allUsersSuccess = (payload: { data: IUser[]}): TAction => ({
   type: types.ALL_USERS_SUCCESS,
   payload,
 });

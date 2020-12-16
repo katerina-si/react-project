@@ -2,17 +2,17 @@ import React from 'react';
 import styles from './Datepicker.module.scss';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Datetime } from '../../utils/date';
+import { getDateFromString, getCurrentDate } from '../../utils/date';
 
 type Props = {
-  selected?: Date;
+  selected: string | Date;
   onChange: (date: Date) => void
 }
 
 const Datepicker = ({ selected, onChange }: Props) => {
-  selected = selected ? Datetime.getDate(selected) : Datetime.getCurrentDate();
+  const date = selected ? getDateFromString(selected) : getCurrentDate();
   return (
-    <DatePicker selected={selected} onChange={onChange} />
+    <DatePicker selected={date} onChange={onChange} />
   );
 }
 
