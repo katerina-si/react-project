@@ -6,8 +6,8 @@ import { IUser } from '../../services/models/User.interface';
 
 type Props = {
   users: IUser[];
-  onOpenUserDetails: (value: any) => void
-  onOpenConfirmModal: (value: any) => void
+  onOpenUserDetails: (value: IUser) => void
+  onOpenConfirmModal: (value: IUser) => void
 }
 
 const UserList = ({ users, onOpenConfirmModal, onOpenUserDetails }: Props) => {

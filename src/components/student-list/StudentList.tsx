@@ -15,7 +15,7 @@ type Props = {
 }
 
 const StudentList = ({ students, onOpenStudentDetails, onOpenConfirmModal, onChangePage, onChangeLimit, paginatorState }: Props) => {
-  const tableData: ITableDataSourceItem[] = students.map((student: IStudent) => {
+  const tableData: any = students.map((student: IStudent) => {
     return {
       key: student.uuid,
       ...student

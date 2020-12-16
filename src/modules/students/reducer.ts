@@ -1,13 +1,12 @@
 import * as types from './constants';
 import * as actions from './actions';
 import { InferValueTypes } from '../../utils/types';
+import { IStudent } from '../../services/models/Student.interface';
 
 const initialState = {
   loading: false,
-  data: [],
-  page: 1,
+  data: {},
   count: 0,
-  limit: 10,
   error: null,
 };
 
@@ -34,6 +33,72 @@ const studentsReducer = (state = initialState, action: TActions) => {
       };
     }
     case types.ALL_STUDENTS_ERROR: {
+      return {
+        ...state,
+        error: payload.message,
+        loading: false,
+      };
+    }
+
+    case types.STUDENT_CREATE_REQUEST: {
+      return {
+        ...state,   
+        loading: true,
+      };
+    }
+    case types.STUDENT_CREATE_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        error: null
+      };
+    }
+    case types.STUDENT_CREATE_ERROR: {
+      return {
+        ...state,
+        error: payload.message,
+        loading: false,
+      };
+    }
+
+    case types.STUDENT_UPDATE_REQUEST: {
+      return {
+        ...state,   
+        loading: true,
+      };
+    }
+    case types.STUDENT_UPDATE_SUCCESS: {
+      if(payload && payload.uuid){
+        Object(state.data)[payload.uuid] = payload;
+      }
+      return {
+        ...state,
+        loading: false,
+        error: null
+      };
+    }
+    case types.STUDENT_UPDATE_ERROR: {
+      return {
+        ...state,
+        error: payload.message,
+        loading: false,
+      };
+    }
+
+    case types.STUDENT_DELETE_REQUEST: {
+      return {
+        ...state,   
+        loading: true,
+      };
+    }
+    case types.STUDENT_DELETE_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        error: null
+      };
+    }
+    case types.STUDENT_UPDATE_ERROR: {
       return {
         ...state,
         error: payload.message,

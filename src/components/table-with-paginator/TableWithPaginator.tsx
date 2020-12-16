@@ -10,8 +10,8 @@ type Props = {
     columns: ITableColumnItem[];
     dataSource: ITableDataSourceItem[];
     paginatorState: Paginator;
-    onChangePage: any
-    onChangeLimit: any
+    onChangePage: (value: number) => void
+    onChangeLimit: (value: number) => void
 }
 
 const TableWithPaginator = ({ columns, dataSource, onChangePage, onChangeLimit, paginatorState }: Props) => {

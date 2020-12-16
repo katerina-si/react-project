@@ -15,7 +15,7 @@ const ConfirmationForm = ({ message, confirmBtnTitle, onConfirmAction }: Props) 
   };
 
   const onConfirm = () => {
-    onConfirmAction(true)
+    onConfirmAction(true) 
   };
 
   return (
