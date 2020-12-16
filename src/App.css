@@ -9,8 +9,12 @@
   min-height: 100vh;
 }
 
-.App>div{
+.App>div:not(.AuthForm){
   width: 100%;
+}
+
+.AuthForm{
+  margin: auto;
 }
 
 
