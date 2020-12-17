@@ -5,18 +5,20 @@ import { IStudent } from '../../services/models/Student.interface';
 
 const initialState = {
   loading: false,
-  profile: {},
+  profile: null,
+  userIsRegistred: false,
   error: null,
 };
 
 type TActions = ReturnType<InferValueTypes <typeof actions>>;
 
-export type StudentListState = Readonly<typeof initialState>
+export type AuthState = Readonly<typeof initialState>
 
-const studentsReducer = (state = initialState, action: TActions) => {
+const authReducer = (state = initialState, action: TActions) => {
   const { type, payload } = action;
   switch (type) {
     case types.LOGIN_REQUEST: {
+      console.log(payload);
       return {
         ...state,
         ...payload,        
@@ -32,6 +34,33 @@ const studentsReducer = (state = initialState, action: TActions) => {
       };
     }
     case types.LOGIN_ERROR: {
+      console.log(payload);
+      return {
+        ...state,
+        error: payload.message,
+        loading: false,
+      };
+    }
+
+
+
+    case types.SIGN_UP_REQUEST: {
+      console.log(payload);
+      return {
+        ...state,
+        ...payload,        
+        loading: true,
+      };
+    }
+    case types.SIGN_UP_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        userIsRegistred: true,
+        error: null
+      };
+    }
+    case types.SIGN_UP_ERROR: {
       return {
         ...state,
         error: payload.message,
@@ -45,4 +74,4 @@ const studentsReducer = (state = initialState, action: TActions) => {
   }
 };
 
-export default studentsReducer;
+export default authReducer;

@@ -11,3 +11,7 @@ export const getCurrentDate = (): Date => {
 export const formatedDate = (_value: Date, _template: string = template) => {
     return format(_value, _template);
 } 
+
+export const dateInISO = (_value: Date = new Date()) => {
+    return new Date().toISOString();
+} 

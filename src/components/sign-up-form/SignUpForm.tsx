@@ -25,7 +25,7 @@ const SignUpForm = ({ onSendForm }: Props) => {
   });
 
   return (
-    <form className={styles.FormContainer} onSubmit={() => onSendForm(form)}>
+    <form className={styles.FormContainer} onSubmit={(e) => onSendForm(e,form)}>
       <label className={styles.FormTitle}>Sign up</label>
       <div className={styles.FormInputContainer}>
         <label>First Name</label>

@@ -1,15 +1,17 @@
-import { IStudent } from "../../services/models/Student.interface"
 import { IUser } from "../../services/models/User.interface"
+import { formatedDate, getDateFromString, dateInISO } from "../../utils/date";
 
-export function mapStudentFromServer(user: IUser) {
+
+export function mapProfileFromServer(response: {data: IUser}) {
     return {
-        ...user,
+        profile: response.data,
     } 
 }
 
-export function mapProfileFromServer(response: {profile: any}) {
+export function mapNewUserToServer(user: any) {
     return {
-        ...response,
-        profile: response.profile,
+        ...user,         
+        updatedAt: dateInISO(),
+        createdAt: dateInISO(),
     } 
 }

@@ -1,4 +1,4 @@
-import { getTokenInfo } from "../tokenStorage";
+import { getTokenInfo, saveTokenInfo } from "../tokenStorage";
 
 export type HeadersType = {[key: string]: string}
 
@@ -16,4 +16,13 @@ export const formatTokenHeader = (customHeaders = {}) => {
     ...headers,
     ['Access-token']: token,
   };
+};
+
+
+export const putTokenFromHeader = (headers: any) => {
+  const token = getTokenInfo();
+
+  if (!token) {
+    saveTokenInfo(headers['access-token'])
+  }
 };
