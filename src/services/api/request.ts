@@ -21,7 +21,7 @@ request.interceptors.response.use(
 const setPathUrl = (url: string): string => url
 
 function handleResponse<R>(data: AxiosResponse<R>): R {
-  putTokenFromHeader(data.headers)
+  putTokenFromHeader(data.config, data.headers)
   return data.data
 }
 
