@@ -24,7 +24,7 @@ export const putTokenFromHeader = (config: AxiosRequestConfig, headers: any) => 
   const token = getTokenInfo();
   const isLogin = config.url === 'login';
 
-  if (isLogin && !token) {
+  if (isLogin) {
     saveTokenInfo(headers['access-token'])
   }
 };

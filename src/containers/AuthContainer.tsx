@@ -25,13 +25,13 @@ const AuthContainer = ({ type }: Props) => {
   }, [authIsSuccessfull, userIsRegistered])
 
   const onLogin = (e: any, form: ILoginForm) => {
-    dispatch(actions.loginRequest(form));
     e.preventDefault()
+    dispatch(actions.loginRequest(form));
   }
 
   const onSignUp = (e: any, form: IUser) => {
-    dispatch(actions.signUpRequest(form));
     e.preventDefault()
+    dispatch(actions.signUpRequest(form));
   }
 
   return (
