@@ -6,7 +6,7 @@ import { IStudent } from '../../services/models/Student.interface';
 const initialState = {
   loading: false,
   profile: null,
-  userIsRegistred: false,
+  userIsRegistered: false,
   error: null,
 };
 
@@ -18,10 +18,10 @@ const authReducer = (state = initialState, action: TActions) => {
   const { type, payload } = action;
   switch (type) {
     case types.LOGIN_REQUEST: {
-      console.log(payload);
       return {
         ...state,
-        ...payload,        
+        ...payload, 
+        userIsRegistered: false,       
         loading: true,
       };
     }
@@ -34,7 +34,6 @@ const authReducer = (state = initialState, action: TActions) => {
       };
     }
     case types.LOGIN_ERROR: {
-      console.log(payload);
       return {
         ...state,
         error: payload.message,
@@ -45,7 +44,6 @@ const authReducer = (state = initialState, action: TActions) => {
 
 
     case types.SIGN_UP_REQUEST: {
-      console.log(payload);
       return {
         ...state,
         ...payload,        
@@ -56,7 +54,7 @@ const authReducer = (state = initialState, action: TActions) => {
       return {
         ...state,
         loading: false,
-        userIsRegistred: true,
+        userIsRegistered: true,
         error: null
       };
     }
@@ -65,7 +63,7 @@ const authReducer = (state = initialState, action: TActions) => {
         ...state,
         error: payload.message,
         loading: false,
-      };
+      }; 
     }
 
 

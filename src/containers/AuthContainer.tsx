@@ -14,27 +14,23 @@ const AuthContainer = ({ type }: Props) => {
   let history = useHistory();
   const dispatch = useDispatch();
   const authIsSuccessfull = useSelector(selectors.authIsSuccessfull);
-  const userIsRegistred = useSelector(selectors.userIsRegistred);
+  const userIsRegistered = useSelector(selectors.userIsRegistered);
 
   useEffect(() => {
-    if(authIsSuccessfull){
+    if (authIsSuccessfull) {
       history.push('/users');
-    }
-    if(userIsRegistred){
+    } else if (userIsRegistered) {
       history.push('/login');
     }
-  }, [authIsSuccessfull, userIsRegistred])
+  }, [authIsSuccessfull, userIsRegistered])
 
   const onLogin = (e: any, form: ILoginForm) => {
-    console.log(form)
     dispatch(actions.loginRequest(form));
-    console.log('form')
     e.preventDefault()
   }
 
   const onSignUp = (e: any, form: IUser) => {
     dispatch(actions.signUpRequest(form));
-    console.log('form')
     e.preventDefault()
   }
 
