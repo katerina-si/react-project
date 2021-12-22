@@ -5,7 +5,7 @@ const Students = () => {
   return (
     <div>
       Student page
-      <StudentListContainer/>
+      <StudentListContainer />
     </div>
   );
 }

@@ -3,12 +3,12 @@ import axios, {
   AxiosResponse, AxiosRequestConfig
 } from "axios"
 import get from "lodash/get"
-import { formatTokenHeader } from "./headers"
+import { formatTokenHeader, putTokenFromHeader } from "./headers"
 
 const request: AxiosInstance = axios.create()
 
 request.interceptors.response.use(
-  (config: AxiosResponse): AxiosResponse => config,
+  (config: AxiosResponse): AxiosResponse => {console.log(config); return config},
   (error: AxiosError): Promise<AxiosError> => {
     if ([403].includes(get(error, "response.status"))) {
      // need to implement
@@ -21,6 +21,7 @@ request.interceptors.response.use(
 const setPathUrl = (url: string): string => url
 
 function handleResponse<R>(data: AxiosResponse<R>): R {
+  putTokenFromHeader(data.config, data.headers)
   return data.data
 }
 

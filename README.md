@@ -19,4 +19,4 @@ curl -s -D - -o /dev/null --location --request POST 'http://10.0.6.46/prod/login
  	"email": "ikniazev@domain.com",
  	"password": "111111"
  	
- }'
+ }

@@ -1,4 +1,5 @@
-import { getTokenInfo } from "../tokenStorage";
+import { getTokenInfo, saveTokenInfo } from "../tokenStorage";
+import { AxiosRequestConfig } from "axios";
 
 export type HeadersType = {[key: string]: string}
 
@@ -16,4 +17,13 @@ export const formatTokenHeader = (customHeaders = {}) => {
     ...headers,
     ['Access-token']: token,
   };
+};
+
+
+export const putTokenFromHeader = (config: AxiosRequestConfig, headers: any) => {
+  const isLogin = config.url === 'login';
+
+  if (isLogin) {
+    saveTokenInfo(headers['access-token'])
+  }
 };

@@ -3,21 +3,35 @@ import { useHistory } from 'react-router-dom';
 import { IUser } from '../services/models/User.interface';
 import { LoginForm, ILoginForm } from '../components/login-form/LoginForm';
 import { SignUpForm } from '../components/sign-up-form/SignUpForm';
+import * as actions from '../modules/auth/actions';
+import * as selectors from '../modules/auth/selectors';
+import { useDispatch, useSelector } from 'react-redux';
 
 type Props = {
   type: 'login' | 'signUp',
 }
 const AuthContainer = ({ type }: Props) => {
   let history = useHistory();
+  const dispatch = useDispatch();
+  const authIsSuccessfull = useSelector(selectors.authIsSuccessfull);
+  const userIsRegistered = useSelector(selectors.userIsRegistered);
 
-  const onLogin = (form: ILoginForm) => {
-    console.log(form)
-    history.push('/users');
+  useEffect(() => {
+    if (authIsSuccessfull) {
+      history.push('/users');
+    } else if (userIsRegistered) {
+      history.push('/login');
+    }
+  }, [authIsSuccessfull, userIsRegistered])
+
+  const onLogin = (e: any, form: ILoginForm) => {
+    e.preventDefault()
+    dispatch(actions.loginRequest(form));
   }
 
-  const onSignUp = (form: IUser) => {
-    console.log(form)
-    history.push('/users');
+  const onSignUp = (e: any, form: IUser) => {
+    e.preventDefault()
+    dispatch(actions.signUpRequest(form));
   }
 
   return (
